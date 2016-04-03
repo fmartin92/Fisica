@@ -1,0 +1,179 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{mathpazo}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage[colorlinks=true, pagebackref=true]{hyperref}
+\usepackage[alphabetic]{amsrefs}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{titlesec} %reasonable chapter headings
+\usepackage{stmaryrd} %double brackets
+\usepackage{tikz}
+\usepackage[toc,page]{appendix}
+%\usepackage{showlabels}
+\usepackage{geometry}
+\usepackage[margin=1.2cm]{caption}
+\usepackage{leading}
+\leading{14.5pt}
+
+\lstset{language=Python,
+backgroundcolor=\color{gray!20},
+numberstyle=\footnotesize,
+breaklines=true,
+basicstyle=\footnotesize,
+keywordstyle=\bfseries\color{blue},
+commentstyle=\itshape\color{purple},
+%identifierstyle=\color{blue},
+stringstyle=\color{orange}}
+\usetikzlibrary{arrows,positioning,through,decorations.pathmorphing, decorations.markings}
+
+\usepackage{chngcntr}
+\counterwithout{equation}{section} %this fixes equation numbering
+
+%\titleformat{\chapter}[display]
+%  {\normalfont\bfseries}{}{0pt}{\Huge} %this eliminates the 'Chapter n' heading
+
+\hypersetup{linkcolor=teal, citecolor=teal}
+
+\def\noteson{%
+\gdef\note##1{\marginpar[##1]{##1}}}
+\gdef\notesoff{\gdef\note##1{}}
+\notesoff
+
+\renewcommand\bibname{References}
+\renewcommand*{\proofname}{Demostración}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\kQ}{k\langle Q\rangle}
+\newcommand{\KQ}{k\langle\!\langle Q\rangle\!\rangle}
+\newcommand{\cyc}{\mathrm{cyc}}
+\newcommand{\cf}{\mathrm{cf}}
+\newcommand{\FA}{k\langle x_1,\dots,x_n\rangle}
+\newcommand{\mon}{\langle X\rangle}
+\newcommand{\irr}{k\langle X\rangle_{\mathrm{irr}}}
+\newcommand{\llangle}{\langle\!\langle}
+\newcommand{\rrangle}{\rangle\!\rangle}
+\newcommand{\cinf}{C^\infty}
+\newcommand{\cotg}{T^*M}
+\newcommand{\id}{\mathrm{id}}
+
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SL}{SL}
+
+
+\newcommand\claim[2][.8]{%
+  \begin{minipage}{#1\displaywidth}%
+  \itshape
+  #2
+  \end{minipage}%
+}
+
+\theoremstyle{plain}
+\newtheorem{prop}{Proposición}[section]
+\newtheorem{lemma}[prop]{Lema}
+\newtheorem{thm}[prop]{Teorema}
+\newtheorem{obs}[prop]{Observación}
+\theoremstyle{definition}
+\newtheorem{defn}[prop]{Definición}
+\newtheorem{exmp}[prop]{Ejemplo}
+\newtheorem{heur}[prop]{Heurística}
+
+\title{Elementos de Física Matemática Moderna}
+\date{}
+
+\begin{document}
+\maketitle{}
+
+Todas las variedades van a ser diferenciales, todas las funciones $\cinf$ y todos los espacios vectoriales sobre $\RR$.
+\section{21/03 -- Geometría simpléctica}
+Dada una variedad $M$, podemos considerar el fibrado de formas bilineales $\cotg\otimes\cotg$. Este fibrado admite una descomposición en suma directa
+\[\cotg\otimes\cotg = S^2\cotg \oplus \Lambda^2 \cotg,\]
+donde los sumandos son las formas bilineales simétricas y antisimétricas respectivamente. Las variedades equipadas con una forma bilineal simétrica no degenerada son los objetos de estudio de la geometría riemanniana. Empezaremos estudiando geometría simpléctica, que se corresponde al segundo caso: el de una variedad equipada con una forma bilineal antisimétrica no degenerada.
+
+\begin{defn} Un \emph{espacio vectorial simpléctico}, o simplemente \emph{espacio simpléctico}, es un par $(E,w)$, donde $E$ es un espacio vectorial de dimensión finita y $w:E\times E\to E$ una forma bilineal antisimétrica no degenerada. Una transformación lineal $T$ entre espacios simplécticos $(E,w)$ y $(F,w')$ se dice \emph{simpléctica} si preserva esta estructura; es decir, si
+\[w(x,y)=w'\left(T(x), T(y)\right)\]
+para todo $x,y\in E$. Un espacio simpléctico $(E,w)$ admite una orientación canónica dada por la forma de volumen
+\[\Omega = \frac{(-1)^n}{(2n)!}\, \underbrace{(w\wedge\dots\wedge w)}_{\substack{\text{$n$ veces}}}.\]
+\end{defn}
+
+\begin{exmp} Algunos ejemplos de espacios simplécticos:
+\begin{enumerate}
+\item $\RR^2$ con la forma bilineal $w\left((x_1,x_2), (y_1,y_2)\right)=x_1y_2 - x_2y_1$.
+\item $\RR^n\oplus (\RR^n)^*$ con la forma bilineal $w\left((x_1,\varphi_1),(x_2,\varphi_2)\right) = \varphi_2(x_1)-\varphi_1(x_2)$.
+\end{enumerate}
+\end{exmp}
+
+\begin{prop} Sea $(E,w)$ un espacio simpléctico. Entonces $\dim E$ es par, y además existe una base $B=\{e_1,\dots,e_{2n}\}$ de modo que
+\[[w]_B=\begin{bmatrix}
+    0 &\id_n\\
+    -\id_n & 0
+\end{bmatrix}.\]
+\end{prop}
+\begin{proof} Sea $e_1\in E$. Como la forma $w$ es no degenerada, existe $e_2\in E$ de modo que $w(e_1,e_2)=1$.
+
+Dado un subespacio $F\subseteq E$, llamamos $F^\perp = \{x\in E : w(x,y)=0$ para todo $y\in F\}$. Consideremos el subespacio $E_1 = \langle e_1, e_2\rangle$. Afirmamos que $E = E_1\oplus E_1^\perp$. En efecto, si $x\in E_1\cap E_1^\perp$, escribiendo a $x=a e_1 + b e_2$ se tiene que:
+\begin{align*}
+-b&=w(x,e_1)=0\\
+a&=w(x,e_2) =0
+\end{align*}
+y así $x=0$. Por otro lado, si $x\in E$ y llamamos $w(x,e_1)=a$, $w(x,e_2)=b$, se tiene entonces que
+\[ x = \underbrace{(-ae_2 + be_1)}_{\substack{\in E_1}} + \underbrace{(x+ae_2-be_1)}_{\substack{\in E_1^\perp}},\]
+por lo que $E=E_1+E_1^\perp$.
+
+De esta forma, aplicando el mismo razonamiento de manera inductiva sobre $E_1^\perp$ obtenemos una descomposición
+\[E=E_1\oplus E_2 \oplus\dots\oplus E_n,\]
+donde los subespacios $E_i$ son de dimensión 2 y ortogonales entre sí, y cada uno admite una base similar a la que admite $E_1$. Esto prueba que la dimensión de $E$ es par, y reacomodando a la unión de las bases de los $E_i$ obtenemos una base para $E$ en la que $w$ se expresa como en el enunciado.
+\end{proof}
+\begin{obs} Si $(E,w)$ es un espacio simpléctico y $T:E\to E$ es un endomorfismo simpléctico, entonces $T$ preserva la forma de volumen (y por lo tanto la orientación). Además, si $X$ es la matriz de la forma $w$ y $A$ la matriz de $T$ en cierta base $B$, tenemos que $A^tXA=X$, por lo que $\det(T)=\pm 1$. En particular, $T$ es un isomorfismo.
+\end{obs}
+La proposición anterior implica en particular que el conjunto de endomorfismos simplécticos de $(E,w)$ forma un grupo (de hecho, un grupo de Lie), al cual llamaremos $\Sp(E,w)$. Más aún, como $T$ preserva la forma de volumen, debe ser $\Omega=T^*(\Omega) = \det(T)\,\Omega$, por lo que el determinante debe ser exactamente 1, y así $\Sp(E,w)\subseteq \SL(E)$.
+\begin{defn} Una \emph{variedad simpléctica} es un par $(M,w)$, donde $M$ es una variedad y $w$ es una 2-forma diferencial cerrada y no degenerada (esto último significa que cada fibra $w_p$ es una forma bilineal no degenerada sobre $TpM$). De esta manera, tenemos una familia $(T_pM, w_p)$ de espacios simplécticos de modo que las formas asociadas varían de manera suave. De la misma manera que en el caso de los espacios simplécticos, las variedades simplécticas tienen una orientación canónica.
+\end{defn}
+
+\begin{exmp} Algunos ejemplos sencillos de variedades simplécticas:
+\begin{enumerate}
+\item Cualquier espacio simpléctico, con la estructura de variedad usual sobre un espacio vectorial.
+\item Si $(\theta, t)$ son las coordenadas usuales en el cilindro infinito $S^1\times \RR$, la 2-forma $w=\mathrm{d}\theta\wedge\mathrm{d}t$ induce una estructura simpléctica.
+\item El toro admite una estructura simpléctica dada por $w=\mathrm{d}\theta_1\wedge\mathrm{d}\theta_2$, donde $(\theta_1,\theta_2)$ son las coordenadas usuales.
+\item Si $(\theta,\varphi)$ son coordenadas esféricas para $S^2$, $w=\sin(\theta)\mathrm{d}\theta\wedge\mathrm{d}\varphi$ induce una estructura simpléctica.
+\end{enumerate}
+\end{exmp}
+\begin{exmp} Sea $N$ una variedad diferencial y consideremos $M=T^*N$ el fibrado cotangente sobre $N$ junto con la proyección canónica $\pi:M\to N$. La diferencial de esta aplicación es el mapa $T\pi:TM\to TN$. Sea $\varphi\in M$ y llamemos $p$ al punto $\pi(\varphi)$. Si $v\in T_\varphi M$, entonces $T\pi(v)$ es un elemento de $T_pN$. Ahora bien, como $\varphi \in (T_pN)^*$, tiene sentido calcular $\varphi(T\pi(v))\in \RR$. Notemos $\alpha = \varphi\circ T\pi$; así, $\alpha$ es una 1-forma en $M$, llamada \emph{1-forma tautológica}. Definimos $w=-\mathrm{d}\alpha$. La 2-forma $w$, llamada \emph{potencial simpléctico}, es obviamente cerrada, pues es exacta, y además es no degenerada, como veremos al escribirla en términos de cartas locales. Esto da una estructura simpléctica canónica sobre el fibrado cotangente.
+
+Describamos a la 2-forma $w$ en coordenadas locales. Sea $(U, (q^1,\dots q^n))$ una carta local en $N$ que trivializa el fibrado cotangente, de modo que tenemos una carta para $\pi^{-1}(U)$ dada por $(q^1,\dots,q^n,p_1,\dots,p_n)$. De esta manera, todo elemento $\varphi\in\pi^{-1}(U)$ se escribe como
+\[\varphi = \sum a_i p_i + \sum b^jq^j.\]
+La 1-forma tautológica $\alpha$ se comporta localmente como
+\[\alpha(q^1,\dots,q^n,p_1,\dots,p_n)= \pi^*_{(q^i,p_j)}(p_j) =(p_1,\dots,p_n,0,\dots,0)\]
+y así obtenemos que
+\[\alpha=\sum p_i\,\mathrm{d}q^i.\]
+Por lo tanto, el potencial simpléctico asociado es
+\[w= -\mathrm{d}\alpha = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
+Observemos que si $N=\RR^n$, entonces el fibrado cotangente $M$ es $\RR^n\oplus (\RR^n)^*$ y la forma simpléctica que produce este mecanismo es la forma simpléctica usual.
+\end{exmp}
+
+El comportamiento local de la estructura que dimos sobre el cotangente es característico de las variedades simplécticas en general, como veremos en el siguiente teorema.
+
+\begin{thm}[Darboux] Si $(M,w)$ es una variedad simpléctica de dimensión $2n$, entonces para todo punto $p\in M$ existe una carta local en $p$ de la forma $\left(U, (q^1,\dots,q^n,p_1,\dots,p_n)\right)$ de modo que
+\[w|_U = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
+Es decir, todas las variedades simplécticas exhiben el mismo comportamiento local.
+\end{thm}
+
+Este teorema implica que la geometría simpléctica no presenta invariantes locales, a diferencia de la geometría riemanniana, en donde tenemos por ejemplo invariantes como la curvatura. De este modo, las características a estudiar en el contexto simpléctico son globales.
+
+\section{28/03 -- Formalismo hamiltoniano}
+\end{document}
