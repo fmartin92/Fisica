@@ -67,6 +67,8 @@ stringstyle=\color{orange}}
 \newcommand{\cinf}{C^\infty}
 \newcommand{\cotg}{T^*M}
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\XX}{\mathfrak{X}}
+\newcommand{\LL}{\mathcal{L}}
 
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Ext}{Ext}
@@ -74,6 +76,7 @@ stringstyle=\color{orange}}
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Diff}{Diff}
 
 
 \newcommand\claim[2][.8]{%
@@ -87,11 +90,12 @@ stringstyle=\color{orange}}
 \newtheorem{prop}{Proposición}[section]
 \newtheorem{lemma}[prop]{Lema}
 \newtheorem{thm}[prop]{Teorema}
-\newtheorem{obs}[prop]{Observación}
+
 \theoremstyle{definition}
 \newtheorem{defn}[prop]{Definición}
 \newtheorem{exmp}[prop]{Ejemplo}
 \newtheorem{heur}[prop]{Heurística}
+\newtheorem{obs}[prop]{Observación}
 
 \title{Elementos de Física Matemática Moderna}
 \date{}
@@ -112,10 +116,10 @@ para todo $x,y\in E$. Un espacio simpléctico $(E,w)$ admite una orientación ca
 \end{defn}
 
 \begin{exmp} Algunos ejemplos de espacios simplécticos:
-\begin{enumerate}
+\begin{itemize}
 \item $\RR^2$ con la forma bilineal $w\left((x_1,x_2), (y_1,y_2)\right)=x_1y_2 - x_2y_1$.
 \item $\RR^n\oplus (\RR^n)^*$ con la forma bilineal $w\left((x_1,\varphi_1),(x_2,\varphi_2)\right) = \varphi_2(x_1)-\varphi_1(x_2)$.
-\end{enumerate}
+\end{itemize}
 \end{exmp}
 
 \begin{prop} Sea $(E,w)$ un espacio simpléctico. Entonces $\dim E$ es par, y además existe una base $B=\{e_1,\dots,e_{2n}\}$ de modo que
@@ -141,17 +145,17 @@ donde los subespacios $E_i$ son de dimensión 2 y ortogonales entre sí, y cada 
 \end{proof}
 \begin{obs} Si $(E,w)$ es un espacio simpléctico y $T:E\to E$ es un endomorfismo simpléctico, entonces $T$ preserva la forma de volumen (y por lo tanto la orientación). Además, si $X$ es la matriz de la forma $w$ y $A$ la matriz de $T$ en cierta base $B$, tenemos que $A^tXA=X$, por lo que $\det(T)=\pm 1$. En particular, $T$ es un isomorfismo.
 \end{obs}
-La proposición anterior implica en particular que el conjunto de endomorfismos simplécticos de $(E,w)$ forma un grupo (de hecho, un grupo de Lie), al cual llamaremos $\Sp(E,w)$. Más aún, como $T$ preserva la forma de volumen, debe ser $\Omega=T^*(\Omega) = \det(T)\,\Omega$, por lo que el determinante debe ser exactamente 1, y así $\Sp(E,w)\subseteq \SL(E)$.
+La observación anterior implica en particular que el conjunto de endomorfismos simplécticos de $(E,w)$ forma un grupo (de hecho, un grupo de Lie), al cual llamaremos $\Sp(E,w)$. Más aún, como $T$ preserva la forma de volumen, debe ser $\Omega=T^*(\Omega) = \det(T)\,\Omega$, por lo que el determinante debe ser exactamente 1, y así $\Sp(E,w)\subseteq \SL(E)$.
 \begin{defn} Una \emph{variedad simpléctica} es un par $(M,w)$, donde $M$ es una variedad y $w$ es una 2-forma diferencial cerrada y no degenerada (esto último significa que cada fibra $w_p$ es una forma bilineal no degenerada sobre $TpM$). De esta manera, tenemos una familia $(T_pM, w_p)$ de espacios simplécticos de modo que las formas asociadas varían de manera suave. De la misma manera que en el caso de los espacios simplécticos, las variedades simplécticas tienen una orientación canónica.
 \end{defn}
 
 \begin{exmp} Algunos ejemplos sencillos de variedades simplécticas:
-\begin{enumerate}
+\begin{itemize}
 \item Cualquier espacio simpléctico, con la estructura de variedad usual sobre un espacio vectorial.
 \item Si $(\theta, t)$ son las coordenadas usuales en el cilindro infinito $S^1\times \RR$, la 2-forma $w=\mathrm{d}\theta\wedge\mathrm{d}t$ induce una estructura simpléctica.
 \item El toro admite una estructura simpléctica dada por $w=\mathrm{d}\theta_1\wedge\mathrm{d}\theta_2$, donde $(\theta_1,\theta_2)$ son las coordenadas usuales.
 \item Si $(\theta,\varphi)$ son coordenadas esféricas para $S^2$, $w=\sin(\theta)\mathrm{d}\theta\wedge\mathrm{d}\varphi$ induce una estructura simpléctica.
-\end{enumerate}
+\end{itemize}
 \end{exmp}
 \begin{exmp} Sea $N$ una variedad diferencial y consideremos $M=T^*N$ el fibrado cotangente sobre $N$ junto con la proyección canónica $\pi:M\to N$. La diferencial de esta aplicación es el mapa $T\pi:TM\to TN$. Sea $\varphi\in M$ y llamemos $p$ al punto $\pi(\varphi)$. Si $v\in T_\varphi M$, entonces $T\pi(v)$ es un elemento de $T_pN$. Ahora bien, como $\varphi \in (T_pN)^*$, tiene sentido calcular $\varphi(T\pi(v))\in \RR$. Notemos $\alpha = \varphi\circ T\pi$; así, $\alpha$ es una 1-forma en $M$, llamada \emph{1-forma tautológica}. Definimos $w=-\mathrm{d}\alpha$. La 2-forma $w$, llamada \emph{potencial simpléctico}, es obviamente cerrada, pues es exacta, y además es no degenerada, como veremos al escribirla en términos de cartas locales. Esto da una estructura simpléctica canónica sobre el fibrado cotangente.
 
@@ -169,11 +173,162 @@ Observemos que si $N=\RR^n$, entonces el fibrado cotangente $M$ es $\RR^n\oplus 
 El comportamiento local de la estructura que dimos sobre el cotangente es característico de las variedades simplécticas en general, como veremos en el siguiente teorema.
 
 \begin{thm}[Darboux] Si $(M,w)$ es una variedad simpléctica de dimensión $2n$, entonces para todo punto $p\in M$ existe una carta local en $p$ de la forma $\left(U, (q^1,\dots,q^n,p_1,\dots,p_n)\right)$ de modo que
-\[w|_U = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
-Es decir, todas las variedades simplécticas exhiben el mismo comportamiento local.
+\[w\big{|}_U = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
+Es decir, todas las variedades simplécticas exhiben el mismo comportamiento local. \hfill\qedsymbol
 \end{thm}
 
 Este teorema implica que la geometría simpléctica no presenta invariantes locales, a diferencia de la geometría riemanniana, en donde tenemos por ejemplo invariantes como la curvatura. De este modo, las características a estudiar en el contexto simpléctico son globales.
 
 \section{28/03 -- Formalismo hamiltoniano}
+
+\begin{defn} Dado un sistema físico, un \emph{espacio de configuraciones} $S$ es una variedad diferencial que describe todos los posibles estados en los que puede hallarse el sistema.
+\end{defn}
+
+\begin{exmp} Veamos algunos ejemplos de sistemas físicos y sus espacios de configuraciones asociados:
+\begin{itemize}
+\item El sistema dado por una única partícula puntual tiene como espacio de configuraciones a $\RR^3$.
+\item Si consideramos ahora un sistema de $n$ partículas, su espacio de configuraciones es $S=\{(x_1,\dots, x_n)\in\RR^n : x_i\neq x_j$ si $i\neq j\}$, pues dos partículas diferentes no pueden posicionarse en el mismo punto.
+\item Podemos describir la posición de una barra unidimensional de longitud fija precisando la posición de su punto medio y el ángulo que forma con el eje horizontal. Como un ángulo y su inverso describen la misma posición, ya que pensamos a la barra como no orientada, el espacio de configuraciones es entonces $\RR^3\times \RR P^2$.
+\end{itemize}
+\end{exmp}
+Supongamos que tenemos un espacio de configuraciones $S$, de modo que nuestro sistema físico está en el estado $s_1\in S$ en el instante $t_1$ y en el estado $s_2\in S$ en el instante $t_2$, con $t_2\geq t_1$. En ese caso definimos $F_{t_2,t_1}:S\to S$ poniendo $F_{t_2,t_1}(s_1)=s_2$. El operador $F$ se llamará \emph{operador de evolución} del sistema. Haremos algunas hipótesis sobre este operador. En primer lugar, pediremos que satisfaga las ecuaciones de Chapman-Kolmogorov:
+\[F_{t_3,t_2}\circ F_{t_2,t_1} = F_{t_3,t_1}\]
+para $t_1\leq t_2 \leq t_3$. Esta familia de ecuaciones puede pensarse como una versión continua de la propiedad de Markov, y hacen que el comportamiento del sistema sea independiente de configuraciones previas. Supondremos además que $F_{t_2,t_1}$ depende solamente de la diferencia $t=t_2-t_1$, pues no queremos que la elección del origen temporal influya en la descripción del sistema. De ahora en más nos referiremos a $F_t$ en lugar de $F_{t_2,t_1}$. Con esta notación, las ecuaciones de Chapman-Kolmogorov se escriben
+\[F_s\circ F_t = F_{s+t}\]
+para $s,t\in \RR_{\geq 0}$.
+
+Usualmente trabajaremos con un campo vectorial sobre el espacio de configuraciones $S$ que modela la evolución del sistema, en el sentido que si $p\in S$, nuestro operador de evolución $F_t(p)$ coincidirá con la curva integral $c_t(p)$ que describe la trayectoria de $p$. Por definición, se tiene
+\[\frac{\mathrm{d}}{\mathrm{d}t}c_t(p) = X(c_t(p)).\]
+
+\begin{exmp} \label{ej-hamilton} Supongamos que queremos describir la evolución del sistema compuesto por una única partícula puntual sobre la que actúa una fuerza conservativa. Nuestro espacio de configuraciones es $S=\RR^3$ y la fuerza viene descripta por un potencial $V:\RR^3\to \RR$. Describiremos la evolución utilizando la segunda ley de Newton. De este modo, si $q(t)=(q^1(t),q^2(t),q^3(t))$ modela la trayectoria de la partícula y $m$ es su masa, entonces
+\begin{equation}\label{newton}
+m\,\frac{\mathrm{d}^2}{\mathrm{d}t^2} q= -\nabla V
+\end{equation}
+Esta ecuación es de segundo orden, por lo que trataremos de llevarla a un sistema de ecuaciones de primer orden. Definimos los \emph{momentos}
+\begin{equation}\label{momentos}
+p_i= m\,\frac{\mathrm{d}}{\mathrm{d}t}q^i
+\end{equation}
+y el \emph{operador Hamiltoniano}
+\[H(q^i,p_i)= \frac{1}{2m}(p_1^2+p_2^2+p_3^2)+V(q).\]
+Con estas definiciones podemos llevar la ecuación original al siguiente sistema de ecuaciones de primer orden:
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}t}q^i &= \frac{\partial H}{\partial p_i}\\
+\frac{\mathrm{d}}{\mathrm{d}t}p_i &= -\frac{\partial H}{\partial q^i}
+\end{align*}
+La primera de estas ecuaciones encapsula la relación \eqref{momentos} y la segunda refleja la ley de Newton \eqref{newton}. Observamos que si escribimos $c=(q^i,p_i)$, este sistema de ecuaciones se escribe como
+\[\frac{\mathrm{d}}{\mathrm{d}t}c=\begin{bmatrix}
+    0 &\id_3\\
+    -\id_3 & 0
+\end{bmatrix}\nabla H,\]
+es decir, la evolución del sistema está dada por una forma simpléctica actuando sobre el gradiente del Hamiltoniano.
+\end{exmp}
+
+Supongamos que estamos trabajando con un sistema físico cuya evolución está descripta por un operador $F_t$. Puede que la definición de $F_t$ siga teniendo sentido para $t<0$, en cuyo caso diremos que el sistema es \emph{reversible}.
+\begin{defn} Sea $M$ una variedad. Un \emph{flujo (global)} es una familia de funciones suaves $F_t:M\to M$ que a su vez varían suavemente con $t\in \RR$, de modo que
+\begin{itemize}
+\item $F_0=\id$,
+\item $F_s\circ F_t = F_{t+s}$ para todo $t,s\in \RR$.
+\end{itemize}
+En particular, esta definición implica que $F_{-t}=F_t^{-1}$, por lo que $F_t$ resulta un difeomorfismo para todo $t\in\RR$. Si notamos $\Diff(M)$ al grupo de difeomorfismos en $M$, un flujo global es simplemente un morfismo de grupos $F:\RR\to\Diff(M)$ que además verifica una condición de suavidad.
+\end{defn}
+
+\begin{defn} Si $F_t$ es un flujo en $M$, entonces para cada $p\in M$ notaremos $c_t(p)=F_t(p)$ a la curva de trayectoria de $p$. Como $c_0(p)=p$, podemos pensar al germen $X(p)=[c_t(p)]$ como un elemento de $TpM$. Queda así definido un campo vectorial $X$ sobre $M$, que se dice el \emph{campo de velocidades} del flujo.
+\end{defn}
+
+Es entonces natural considerar el problema inverso: dado un campo vectorial $X$ sobre $M$, ¿existe un flujo del cual es un campo de velocidades?
+
+\begin{defn} Dado un campo vectorial $X$ sobre una variedad $M$, un \emph{flow box} es una terna $(U,a,F)$, donde $U\subseteq M$ es un abierto, $a\in\RR_{>0}$ y $F:(-a,a)\times U\to M$ es tal que
+\begin{itemize}
+\item para todo $p\in U$, la curva $c_t(p) = F_t(p)$ es una curva integral para el campo $X$, es decir
+\[\frac{\mathrm{d}}{\mathrm{d}t}c_t(p) = X(c_t(p)),\]
+\item y para todo $t\in (-a,a)$, la aplicación $F_t:U\to F_t(U)$ es un difeomorfismo.
+\end{itemize}
+En otras palabras, un flow box es un flujo local asociado al campo $X$.
+\end{defn}
+\begin{thm} Si $X$ es un campo vectorial en $M$, para todo $p\in M$ existe un flow box $(U,a,F)$ con $p\in U$. Además, si $(U,a,F)$ y $(V,b,G)$ son flow boxes para $X$, entonces $F$ y $G$ coinciden en $U\cap V$.\hfill\qedsymbol
+\end{thm}
+
+La demostración de este teorema consiste en aplicar el teorema de existencia y unicidad de soluciones de sistemas de ODEs, teniendo en cuenta la dependencia suave de las soluciones respecto al parámetro inicial.
+
+\begin{defn} Un campo vectorial $X$ en $M$ se dice \emph{completo} si admite un flow box global, es decir, uno de la forma $(M,a,F)$.
+\end{defn}
+
+\begin{obs} Supongamos que $(M,a,F)$ es un flow box para un campo vectorial completo $X$. Si $p\in M$, entonces la aplicación $f=(t\mapsto F(t+s,p))$ es una solución a la ecuación diferencial
+\[\frac{\mathrm{d}}{\mathrm{d}t}f = X(f)\]
+con condición inicial $f(0)=F(s,p)=q$. Por otro lado, la aplicación $g=(t\mapsto F(t,F(s,p)))$ verifica la misma ecuación diferencial, con la misma condición inicial. Por lo tanto,
+\[F(t+s, p) = F(t,F(s,p)),\]
+es decir que el flujo satisface las ecuaciones de Chapman-Kolmogorov de manera automática si provienen de un campo completo.
+\end{obs}
+\begin{obs} Si la variedad M es compacta, cualquier campo sobre ella es completo. Para probarlo, basta con tomar un cubrimiento por abiertos de la variedad tales que cada abierto es el dominio de un flow box. Por compacidad, puedo tomar con un subcubrimiento finito y quedarme con el mínimo de los $a\in \RR_{>0}$, de modo que cada uno de estos finitos flow boxes está definido en $(-a,a)$. La condición de unicidad me garantiza que los flow boxes se pegan de manera suave. Este mismo argumento puede llevarse a cabo sobre campos de soporte compacto definidos sobre variedades arbitrarias.
+\end{obs}
+\begin{prop} Si $X$ es un campo vectorial completo, el flujo está definido para todo $t\in \RR$.
+\end{prop}
+\begin{proof} \textcolor{red}{turbioooo} Supongamos que tengo un flow box de la forma $(M,a,F)$. Como ya vimos que satisface las ecuaciones de Chapman-Kolmogorov, si $t\in\RR_{>0}$ escribo $t=ka/2 + \varepsilon$, con $\varepsilon \in (0,a/2)$, se tiene entonces que
+\[F_t = \underbrace{F_{a/2}\circ\dots\circ F_{a/2}}_{\substack{\text{$k$ veces}}}\circ F_\varepsilon,\]
+y además $F_t = F_{-t}^{-1}$ si $t<0$.
+\end{proof}
+El conjunto de campos vectoriales sobre $M$, al cual notamos $\XX(M)$, admite un corchete de Lie: si $X,Y\in \XX(M)$ y $f:M\to \RR$ es una función, entonces
+\[[X,Y]f = X(Yf) - Y(Xf).\]
+El corchete de campos puede interpretarse en términos de los flujos locales asociados. Si $X, Y$ son campos de velocidades de flujos $F_t, G_s$, el corchete mide la falla en la conmutatividad de los flujos a nivel infinitesimal. \textcolor{red}{enunciar esto de manera precisa}
+
+\begin{defn} Sea $(M,w)$ una variedad simpléctica. Si $H:M\to \RR$ es una función, entonces $\mathrm{d}H$ es una 1-forma. La forma simpléctica $w$ nos permite asociarle a $f$ el único campo $X_H$ tal que $\mathrm{d}H = w(X_H, -)$. \textcolor{red}{cómo?} El campo $X_H$ se llama el \emph{campo Hamiltoniano} asociado a $H$.
+\end{defn}
+
+Si $p\in M$ y $(q^i,p_i)$ es un sistema de coordenadas canónicas (es decir, las que proporciona el teorema de Darboux) alrededor de $p$, la ecuación de evolución $\mathrm{d}H = w(X_H, -)$ tiene la siguiente expresión local:
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}t}q^i &= \frac{\partial H}{\partial p_i}\\
+\frac{\mathrm{d}}{\mathrm{d}t}p_i &= -\frac{\partial H}{\partial q^i}
+\end{align*}
+Como podemos ver, este formalismo generaliza el caso estudiado en el \hyperref[ej-hamilton]{ejemplo \ref*{ej-hamilton}}.
+
+\begin{thm}[Conservación de la energía] Sea $F_t$ el flujo asociado al campo Hamiltoniano $X_H$. Entonces, la función $H$ es constante en las curvas integrales del campo $X_H$.
+\end{thm}
+\begin{proof} Definimos $H_t:M\to \RR$ como $H_t(p)=H(F_t(p))$. Basta probar que la función $H_t(p)$ es constante respecto de $t$. Si derivamos:
+\begin{align*}\frac{\mathrm{d}}{\mathrm{d}t} H_t(p)&=\mathrm{d}H_{F_t(p)}\left(\frac{\mathrm{d}}{\mathrm{d}t} F_t(p)\right)\\
+&=\mathrm{d}H_{F_t(p)}\left(X_H(F_t(p))\right)\\
+&= w\left(X_H(F_t(p)), X_H(F_t(p))\right)\\
+&= 0,
+\end{align*}
+pues la forma $w$ es antisimétrica.
+\end{proof}
+\begin{defn} Sea $X$ un campo vectorial sobre una variedad $M$. El campo $X$ define un morfismo $i_X$ de grado $-1$ en el complejo de formas diferenciales en $M$, dado por la asignación $\alpha\mapsto \alpha(X,-)$. A partir de $i_X$ podemos definir la \emph{derivada de Lie} $\LL_X$ asociada al campo $X$. La derivada de Lie es un morfismo de grado $0$ en el complejo de formas diferenciales en $M$, definido como
+\[\LL_X(\alpha) = \mathrm{d}\circ i_X(\alpha) + i_X\circ\mathrm{d}(\alpha).\]
+\end{defn}
+\begin{obs} Consideremos un campo $X$ con flujo asociado $F_t$. La derivada de Lie de $X$ está relacionada con el pullback $F_t^*:\Omega^r(M)\to\Omega^r(M)$ por la siguiente identidad:
+\begin{equation}
+\label{der-lie}
+\frac{\mathrm{d}}{\mathrm{d}t} F_t^*(\alpha) = F_t^*\LL_x(\alpha).
+\end{equation}
+\textcolor{red}{dafuq?}
+\end{obs}
+\begin{defn} Un campo vectorial $X$ se dice \emph{localmente Hamiltoniano} si todo $p\in M$ admite en un entorno abierto $U$ de modo que existe una función $H:U\to \RR$ tal que $X|_U = X_H$.
+\end{defn}
+\begin{prop} Sea $X$ un campo vectorial sobre una variedad simpléctica $(M,w)$. Las siguientes condiciones son equivalentes:
+\begin{enumerate}
+\item La 1-forma $i_X(w)$ es cerrada.
+\item La derivada de Lie $\LL_X(w)$ es nula.
+\item Si $F_t$ es el flujo asociado a $X$, entonces $F_t^*(w)=w$ para todo $t$.
+\end{enumerate}
+\textcolor{red}{Cualquiera de estas condiciones es equivalente a que el campo $X$ sea localmente Hamiltoniano.}
+\end{prop}
+\begin{proof} Veamos primero que las tres condiciones son equivalentes:
+
+$(1\Rightarrow 2)$ Como $w$ es una forma simpléctica, $\mathrm{d}w=0$ por definición. Además por hipótesis $\mathrm{d}\circ i_X(w)=0$. Luego
+\[\LL_X(w)=i_X\circ\mathrm{d}(w)+\mathrm{d}\circ i_X(w)=0.\]
+
+$(2\Rightarrow 3)$ Por la identidad \eqref{der-lie}, sabemos que
+\[\frac{\mathrm{d}}{\mathrm{d}t}F_t^*(w) = F_t^*\LL_X(w)=F_t^*(0)=0.\]
+Por lo tanto, $F_t^*(w)$ es constante en $t$, y como $F_0^*(w)=\id^*(w)=w$, entonces $F_t^*(w)=w$ para todo $t$.
+
+$(3\Rightarrow 1)$ Si $F_t^*$ es constante, entonces
+\[0=\frac{\mathrm{d}}{\mathrm{d}t}F_t^*(w) = F_t^*\LL_X(w)\]
+para todo $t$. Como $F_t$ es un difeomorfismo, $F_t^*$ es un isomorfismo y por lo tanto debe ser $\LL_X(w)=0$. Luego, usando la definición de $\LL_X(w)$ y el hecho de que la forma simpléctica es cerrada, obtenemos
+\[0=\LL_X(w)=i_X\circ\mathrm{d}(w)+\mathrm{d}\circ i_X(w) =\mathrm{d}\circ i_X(w)\]
+y por lo tanto $i_X(w)$ es cerrada.
+
+Veamos finalmente que la condición (1) implica que $X$ es localmente Hamiltoniano. Como $i_X(w)$ es cerrada, el lema de Poincaré nos garantiza que localmente es exacta; es decir, que para todo $p\in M$ existe un entorno $U$ y una $0$-forma $H:M\to \RR$ de modo que $\mathrm{d}H=i_X(w)$. Como por definición es $i_X(w)=w(X,-)$, tenemos que $\mathrm{d}H=w(X,-)$ en $U$ y así $X|_U=X_H$, como queríamos.
+\end{proof}
+
+\begin{obs} Vale la pena destacar que si $H^1(M,\RR)=0$, toda 1-forma cerrada es exacta, y por lo tanto siguiendo el argumento de la proposición anterior obtenemos que todo campo localmente Hamiltoniano es globalmente Hamiltoniano.
+\end{obs}
 \end{document}
