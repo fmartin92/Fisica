@@ -69,6 +69,11 @@ stringstyle=\color{orange}}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\XX}{\mathfrak{X}}
 \newcommand{\LL}{\mathcal{L}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ddt}{\frac{\dd}{\dd t}}
+\newcommand{\dds}{\frac{\dd}{\dd s}}
+\newcommand{\pardev}[2]{\frac{\partial #1}{\partial #2}}
+
 
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Ext}{Ext}
@@ -152,28 +157,28 @@ La observación anterior implica en particular que el conjunto de endomorfismos 
 \begin{exmp} Algunos ejemplos sencillos de variedades simplécticas:
 \begin{itemize}
 \item Cualquier espacio simpléctico, con la estructura de variedad usual sobre un espacio vectorial.
-\item Si $(\theta, t)$ son las coordenadas usuales en el cilindro infinito $S^1\times \RR$, la 2-forma $w=\mathrm{d}\theta\wedge\mathrm{d}t$ induce una estructura simpléctica.
-\item El toro admite una estructura simpléctica dada por $w=\mathrm{d}\theta_1\wedge\mathrm{d}\theta_2$, donde $(\theta_1,\theta_2)$ son las coordenadas usuales.
-\item Si $(\theta,\varphi)$ son coordenadas esféricas para $S^2$, $w=\sin(\theta)\mathrm{d}\theta\wedge\mathrm{d}\varphi$ induce una estructura simpléctica.
+\item Si $(\theta, t)$ son las coordenadas usuales en el cilindro infinito $S^1\times \RR$, la 2-forma $w=\dd \theta\wedge\dd t$ induce una estructura simpléctica.
+\item El toro admite una estructura simpléctica dada por $w=\dd \theta_1\wedge\dd \theta_2$, donde $(\theta_1,\theta_2)$ son las coordenadas usuales.
+\item Si $(\theta,\varphi)$ son coordenadas esféricas para $S^2$, $w=\sin(\theta)\dd \theta\wedge\dd \varphi$ induce una estructura simpléctica.
 \end{itemize}
 \end{exmp}
-\begin{exmp} Sea $N$ una variedad diferencial y consideremos $M=T^*N$ el fibrado cotangente sobre $N$ junto con la proyección canónica $\pi:M\to N$. La diferencial de esta aplicación es el mapa $T\pi:TM\to TN$. Sea $\varphi\in M$ y llamemos $p$ al punto $\pi(\varphi)$. Si $v\in T_\varphi M$, entonces $T\pi(v)$ es un elemento de $T_pN$. Ahora bien, como $\varphi \in (T_pN)^*$, tiene sentido calcular $\varphi(T\pi(v))\in \RR$. Notemos $\alpha = \varphi\circ T\pi$; así, $\alpha$ es una 1-forma en $M$, llamada \emph{1-forma tautológica}. Definimos $w=-\mathrm{d}\alpha$. La 2-forma $w$, llamada \emph{potencial simpléctico}, es obviamente cerrada, pues es exacta, y además es no degenerada, como veremos al escribirla en términos de cartas locales. Esto da una estructura simpléctica canónica sobre el fibrado cotangente.
+\begin{exmp} Sea $N$ una variedad diferencial y consideremos $M=T^*N$ el fibrado cotangente sobre $N$ junto con la proyección canónica $\pi:M\to N$. La diferencial de esta aplicación es el mapa $T\pi:TM\to TN$. Sea $\varphi\in M$ y llamemos $p$ al punto $\pi(\varphi)$. Si $v\in T_\varphi M$, entonces $T\pi(v)$ es un elemento de $T_pN$. Ahora bien, como $\varphi \in (T_pN)^*$, tiene sentido calcular $\varphi(T\pi(v))\in \RR$. Notemos $\alpha = \varphi\circ T\pi$; así, $\alpha$ es una 1-forma en $M$, llamada \emph{1-forma tautológica}. Definimos $w=-\dd \alpha$. La 2-forma $w$, llamada \emph{potencial simpléctico}, es obviamente cerrada, pues es exacta, y además es no degenerada, como veremos al escribirla en términos de cartas locales. Esto da una estructura simpléctica canónica sobre el fibrado cotangente.
 
 Describamos a la 2-forma $w$ en coordenadas locales. Sea $(U, (q^1,\dots q^n))$ una carta local en $N$ que trivializa el fibrado cotangente, de modo que tenemos una carta para $\pi^{-1}(U)$ dada por $(q^1,\dots,q^n,p_1,\dots,p_n)$. De esta manera, todo elemento $\varphi\in\pi^{-1}(U)$ se escribe como
 \[\varphi = \sum a_i p_i + \sum b^jq^j.\]
 La 1-forma tautológica $\alpha$ se comporta localmente como
 \[\alpha(q^1,\dots,q^n,p_1,\dots,p_n)= \pi^*_{(q^i,p_j)}(p_j) =(p_1,\dots,p_n,0,\dots,0)\]
 y así obtenemos que
-\[\alpha=\sum p_i\,\mathrm{d}q^i.\]
+\[\alpha=\sum p_i\,\dd q^i.\]
 Por lo tanto, el potencial simpléctico asociado es
-\[w= -\mathrm{d}\alpha = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
+\[w= -\dd \alpha = \sum \dd p_i\wedge \dd q^i.\]
 Observemos que si $N=\RR^n$, entonces el fibrado cotangente $M$ es $\RR^n\oplus (\RR^n)^*$ y la forma simpléctica que produce este mecanismo es la forma simpléctica usual.
 \end{exmp}
 
 El comportamiento local de la estructura que dimos sobre el cotangente es característico de las variedades simplécticas en general, como veremos en el siguiente teorema.
 
 \begin{thm}[Darboux] Si $(M,w)$ es una variedad simpléctica de dimensión $2n$, entonces para todo punto $p\in M$ existe una carta local en $p$ de la forma $\left(U, (q^1,\dots,q^n,p_1,\dots,p_n)\right)$ de modo que
-\[w\big{|}_U = \sum \mathrm{d}p_i\wedge \mathrm{d}q^i.\]
+\[w\big{|}_U = \sum \dd p_i\wedge \dd q^i.\]
 Es decir, todas las variedades simplécticas exhiben el mismo comportamiento local. \hfill\qedsymbol
 \end{thm}
 
@@ -198,25 +203,25 @@ para $t_1\leq t_2 \leq t_3$. Esta familia de ecuaciones puede pensarse como una 
 para $s,t\in \RR_{\geq 0}$.
 
 Usualmente trabajaremos con un campo vectorial sobre el espacio de configuraciones $S$ que modela la evolución del sistema, en el sentido que si $p\in S$, nuestro operador de evolución $F_t(p)$ coincidirá con la curva integral $c_t(p)$ que describe la trayectoria de $p$. Por definición, se tiene
-\[\frac{\mathrm{d}}{\mathrm{d}t}c_t(p) = X(c_t(p)).\]
+\[\ddt c_t(p) = X(c_t(p)).\]
 
 \begin{exmp} \label{ej-hamilton} Supongamos que queremos describir la evolución del sistema compuesto por una única partícula puntual sobre la que actúa una fuerza conservativa. Nuestro espacio de configuraciones es $S=\RR^3$ y la fuerza viene descripta por un potencial $V:\RR^3\to \RR$. Describiremos la evolución utilizando la segunda ley de Newton. De este modo, si $q(t)=(q^1(t),q^2(t),q^3(t))$ modela la trayectoria de la partícula y $m$ es su masa, entonces
 \begin{equation}\label{newton}
-m\,\frac{\mathrm{d}^2}{\mathrm{d}t^2} q= -\nabla V
+m\,\frac{\dd ^2}{\dd t^2} q= -\nabla V
 \end{equation}
 Esta ecuación es de segundo orden, por lo que trataremos de llevarla a un sistema de ecuaciones de primer orden. Definimos los \emph{momentos}
 \begin{equation}\label{momentos}
-p_i= m\,\frac{\mathrm{d}}{\mathrm{d}t}q^i
+p_i= m\,\ddt q^i
 \end{equation}
 y el \emph{operador Hamiltoniano}
 \[H(q^i,p_i)= \frac{1}{2m}(p_1^2+p_2^2+p_3^2)+V(q).\]
 Con estas definiciones podemos llevar la ecuación original al siguiente sistema de ecuaciones de primer orden:
 \begin{align*}
-\frac{\mathrm{d}}{\mathrm{d}t}q^i &= \frac{\partial H}{\partial p_i}\\
-\frac{\mathrm{d}}{\mathrm{d}t}p_i &= -\frac{\partial H}{\partial q^i}
+\ddt q^i &= \frac{\partial H}{\partial p_i}\\
+\ddt p_i &= -\frac{\partial H}{\partial q^i}
 \end{align*}
 La primera de estas ecuaciones encapsula la relación \eqref{momentos} y la segunda refleja la ley de Newton \eqref{newton}. Observamos que si escribimos $c=(q^i,p_i)$, este sistema de ecuaciones se escribe como
-\[\frac{\mathrm{d}}{\mathrm{d}t}c=\begin{bmatrix}
+\[\ddt c=\begin{bmatrix}
     0 &\id_3\\
     -\id_3 & 0
 \end{bmatrix}\nabla H,\]
@@ -240,7 +245,7 @@ Es entonces natural considerar el problema inverso: dado un campo vectorial $X$ 
 \begin{defn} Dado un campo vectorial $X$ sobre una variedad $M$, un \emph{flow box} es una terna $(U,a,F)$, donde $U\subseteq M$ es un abierto, $a\in\RR_{>0}$ y $F:(-a,a)\times U\to M$ es tal que
 \begin{itemize}
 \item para todo $p\in U$, la curva $c_t(p) = F_t(p)$ es una curva integral para el campo $X$, es decir
-\[\frac{\mathrm{d}}{\mathrm{d}t}c_t(p) = X(c_t(p)),\]
+\[\ddt c_t(p) = X(c_t(p)),\]
 \item y para todo $t\in (-a,a)$, la aplicación $F_t:U\to F_t(U)$ es un difeomorfismo.
 \end{itemize}
 En otras palabras, un flow box es un flujo local asociado al campo $X$.
@@ -254,7 +259,7 @@ La demostración de este teorema consiste en aplicar el teorema de existencia y 
 \end{defn}
 
 \begin{obs} Supongamos que $(M,a,F)$ es un flow box para un campo vectorial completo $X$. Si $p\in M$, entonces la aplicación $f=(t\mapsto F(t+s,p))$ es una solución a la ecuación diferencial
-\[\frac{\mathrm{d}}{\mathrm{d}t}f = X(f)\]
+\[\ddt f = X(f)\]
 con condición inicial $f(0)=F(s,p)=q$. Por otro lado, la aplicación $g=(t\mapsto F(t,F(s,p)))$ verifica la misma ecuación diferencial, con la misma condición inicial. Por lo tanto,
 \[F(t+s, p) = F(t,F(s,p)),\]
 es decir que el flujo satisface las ecuaciones de Chapman-Kolmogorov de manera automática si provienen de un campo completo.
@@ -271,33 +276,33 @@ El conjunto de campos vectoriales sobre $M$, al cual notamos $\XX(M)$, admite un
 \[[X,Y]f = X(Yf) - Y(Xf).\]
 El corchete de campos puede interpretarse en términos de los flujos locales asociados. Si $X, Y$ son campos de velocidades de flujos $F_t, G_s$, el corchete mide la falla en la conmutatividad de los flujos a nivel infinitesimal. \textcolor{red}{enunciar esto de manera precisa}
 
-\begin{defn} Sea $(M,w)$ una variedad simpléctica. Si $H:M\to \RR$ es una función, entonces $\mathrm{d}H$ es una 1-forma. La forma simpléctica $w$ nos permite asociarle a $f$ el único campo $X_H$ tal que $\mathrm{d}H = w(X_H, -)$. \textcolor{red}{cómo?} El campo $X_H$ se llama el \emph{campo Hamiltoniano} asociado a $H$.
+\begin{defn} Sea $(M,w)$ una variedad simpléctica. Si $H:M\to \RR$ es una función, entonces $\dd H$ es una 1-forma. La forma simpléctica $w$ nos permite asociarle a $f$ el único campo $X_H$ tal que $\dd H = w(X_H, -)$. \textcolor{red}{cómo?} El campo $X_H$ se llama el \emph{campo Hamiltoniano} asociado a $H$.
 \end{defn}
 
-Si $p\in M$ y $(q^i,p_i)$ es un sistema de coordenadas canónicas (es decir, las que proporciona el teorema de Darboux) alrededor de $p$, la ecuación de evolución $\mathrm{d}H = w(X_H, -)$ tiene la siguiente expresión local:
+Si $p\in M$ y $(q^i,p_i)$ es un sistema de coordenadas canónicas (es decir, las que proporciona el teorema de Darboux) alrededor de $p$, la ecuación de evolución $\dd H = w(X_H, -)$ tiene la siguiente expresión local:
 \begin{align*}
-\frac{\mathrm{d}}{\mathrm{d}t}q^i &= \frac{\partial H}{\partial p_i}\\
-\frac{\mathrm{d}}{\mathrm{d}t}p_i &= -\frac{\partial H}{\partial q^i}
+\ddt q^i &= \frac{\partial H}{\partial p_i}\\
+\ddt p_i &= -\frac{\partial H}{\partial q^i}
 \end{align*}
 Como podemos ver, este formalismo generaliza el caso estudiado en el \hyperref[ej-hamilton]{ejemplo \ref*{ej-hamilton}}.
 
 \begin{thm}[Conservación de la energía] Sea $F_t$ el flujo asociado al campo Hamiltoniano $X_H$. Entonces, la función $H$ es constante en las curvas integrales del campo $X_H$.
 \end{thm}
 \begin{proof} Definimos $H_t:M\to \RR$ como $H_t(p)=H(F_t(p))$. Basta probar que la función $H_t(p)$ es constante respecto de $t$. Si derivamos:
-\begin{align*}\frac{\mathrm{d}}{\mathrm{d}t} H_t(p)&=\mathrm{d}H_{F_t(p)}\left(\frac{\mathrm{d}}{\mathrm{d}t} F_t(p)\right)\\
-&=\mathrm{d}H_{F_t(p)}\left(X_H(F_t(p))\right)\\
+\begin{align*}\ddt  H_t(p)&=\dd H_{F_t(p)}\left(\ddt  F_t(p)\right)\\
+&=\dd H_{F_t(p)}\left(X_H(F_t(p))\right)\\
 &= w\left(X_H(F_t(p)), X_H(F_t(p))\right)\\
 &= 0,
 \end{align*}
 pues la forma $w$ es antisimétrica.
 \end{proof}
 \begin{defn} Sea $X$ un campo vectorial sobre una variedad $M$. El campo $X$ define un morfismo $i_X$ de grado $-1$ en el complejo de formas diferenciales en $M$, dado por la asignación $\alpha\mapsto \alpha(X,-)$. A partir de $i_X$ podemos definir la \emph{derivada de Lie} $\LL_X$ asociada al campo $X$. La derivada de Lie es un morfismo de grado $0$ en el complejo de formas diferenciales en $M$, definido como
-\[\LL_X(\alpha) = \mathrm{d}\circ i_X(\alpha) + i_X\circ\mathrm{d}(\alpha).\]
+\[\LL_X(\alpha) = \dd \circ i_X(\alpha) + i_X\circ\dd (\alpha).\]
 \end{defn}
 \begin{obs} Consideremos un campo $X$ con flujo asociado $F_t$. La derivada de Lie de $X$ está relacionada con el pullback $F_t^*:\Omega^r(M)\to\Omega^r(M)$ por la siguiente identidad:
 \begin{equation}
 \label{der-lie}
-\frac{\mathrm{d}}{\mathrm{d}t} F_t^*(\alpha) = F_t^*\LL_x(\alpha).
+\ddt  F_t^*(\alpha) = F_t^*\LL_x(\alpha).
 \end{equation}
 \textcolor{red}{dafuq?}
 \end{obs}
@@ -313,22 +318,112 @@ pues la forma $w$ es antisimétrica.
 \end{prop}
 \begin{proof} Veamos primero que las tres condiciones son equivalentes:
 
-$(1\Rightarrow 2)$ Como $w$ es una forma simpléctica, $\mathrm{d}w=0$ por definición. Además por hipótesis $\mathrm{d}\circ i_X(w)=0$. Luego
-\[\LL_X(w)=i_X\circ\mathrm{d}(w)+\mathrm{d}\circ i_X(w)=0.\]
+$(1\Rightarrow 2)$ Como $w$ es una forma simpléctica, $\dd w=0$ por definición. Además por hipótesis $\dd \circ i_X(w)=0$. Luego
+\[\LL_X(w)=i_X\circ\dd (w)+\dd \circ i_X(w)=0.\]
 
 $(2\Rightarrow 3)$ Por la identidad \eqref{der-lie}, sabemos que
-\[\frac{\mathrm{d}}{\mathrm{d}t}F_t^*(w) = F_t^*\LL_X(w)=F_t^*(0)=0.\]
+\[\ddt F_t^*(w) = F_t^*\LL_X(w)=F_t^*(0)=0.\]
 Por lo tanto, $F_t^*(w)$ es constante en $t$, y como $F_0^*(w)=\id^*(w)=w$, entonces $F_t^*(w)=w$ para todo $t$.
 
 $(3\Rightarrow 1)$ Si $F_t^*$ es constante, entonces
-\[0=\frac{\mathrm{d}}{\mathrm{d}t}F_t^*(w) = F_t^*\LL_X(w)\]
+\[0=\ddt F_t^*(w) = F_t^*\LL_X(w)\]
 para todo $t$. Como $F_t$ es un difeomorfismo, $F_t^*$ es un isomorfismo y por lo tanto debe ser $\LL_X(w)=0$. Luego, usando la definición de $\LL_X(w)$ y el hecho de que la forma simpléctica es cerrada, obtenemos
-\[0=\LL_X(w)=i_X\circ\mathrm{d}(w)+\mathrm{d}\circ i_X(w) =\mathrm{d}\circ i_X(w)\]
+\[0=\LL_X(w)=i_X\circ\dd (w)+\dd \circ i_X(w) =\dd \circ i_X(w)\]
 y por lo tanto $i_X(w)$ es cerrada.
 
-Veamos finalmente que la condición (1) implica que $X$ es localmente Hamiltoniano. Como $i_X(w)$ es cerrada, el lema de Poincaré nos garantiza que localmente es exacta; es decir, que para todo $p\in M$ existe un entorno $U$ y una $0$-forma $H:M\to \RR$ de modo que $\mathrm{d}H=i_X(w)$. Como por definición es $i_X(w)=w(X,-)$, tenemos que $\mathrm{d}H=w(X,-)$ en $U$ y así $X|_U=X_H$, como queríamos.
+Veamos finalmente que la condición (1) implica que $X$ es localmente Hamiltoniano. Como $i_X(w)$ es cerrada, el lema de Poincaré nos garantiza que localmente es exacta; es decir, que para todo $p\in M$ existe un entorno $U$ y una $0$-forma $H:M\to \RR$ de modo que $\dd H=i_X(w)$. Como por definición es $i_X(w)=w(X,-)$, tenemos que $\dd H=w(X,-)$ en $U$ y así $X|_U=X_H$, como queríamos.
 \end{proof}
 
 \begin{obs} Vale la pena destacar que si $H^1(M,\RR)=0$, toda 1-forma cerrada es exacta, y por lo tanto siguiendo el argumento de la proposición anterior obtenemos que todo campo localmente Hamiltoniano es globalmente Hamiltoniano.
 \end{obs}
+
+\section{04/04 -- Formalismo lagrangiano}
+
+\begin{defn} Una función $f:M\to \RR$ es una \emph{cantidad conservada} por el sistema físico descripto por $X_H$ si es constante en las líneas del flujo del campo. En otras palabras, si $F_t$ denota al flujo, entonces
+\[\ddt\,( f\circ F_t) = 0.\]
+Por ejemplo, ya vimos que la energía $H$ es una cantidad conservada.
+\end{defn}
+El motivo principal por el cual nos interesa hallar cantidades conservadas por el sistema es porque reducen la dimensión de la variedad en la cual debemos hallar las líneas de flujo. Más precisamente, si sabemos que $f$ es una cantidad conservada, entonces si $f$ tiene valor $c$ en el punto que nos interesa a tiempo $t=0$, toda la curva integral que describe la evolución del punto pertenece a la hipersuperficie de nivel $\{f=c\}$. Idealmente, si hallamos la cantidad suficiente de cantidades conservadas, es posible hallar la curva integral simplemente reduciendo la dimensión de la subvariedad en donde la buscamos de manera iterada, hasta llegar a una subvariedad de dimensión 1. Los sistemas que pueden resolverse de esta forma se denominan sistemas \emph{completamente integrables}.
+
+Daremos ahora una herramienta útil para determinar si ciertas funciones son conservadas por el sistema.
+
+\begin{defn} Sea $(M,w)$ una variedad simpléctica. El \emph{corchete de Poisson} en $M$ es la aplicación bilineal $\{-,-\}:C^\infty(M)\times C^\infty(M)\to C^\infty(M)$ definida como:
+\[\{F,G\} = w(X_F,X_G)=\LL_{X_G}(F).\]
+\end{defn}
+El corchete de Poisson es una derivación y satisface la identidad de Jacobi. Tenemos además una expresión local en coordenadas canónicas $(q^1,\dots,q^n,p_1,\dots,p_n)$:
+\[\{F,G\} = \sum_{i=1}^n \left(\pardev{F}{q^i}\,\pardev{G}{p_i} - \pardev{F}{p_i}\,\pardev{G}{q^i}\right).\]
+De esta manera, tenemos dos álgebras de Lie relacionadas con nuestra variedad $M$: el álgebra de campos $(\XX(M), [-,-])$ y el álgebra de funciones $(C^\infty(M), \{-,-\})$. Estas estructuras están relacionadas por la identidad
+\[X_{\{F,G\}} = [X_F,X_G],\]
+o en otras palabras, el morfismo $C^\infty(M)\ni F \mapsto X_F\in\XX(M)$ es de álgebras de Lie.
+\begin{prop} Si $G\in C^\infty(M)$ y $F_t$ es el flujo del campo $X_H$, entonces
+\[\ddt (G\circ F_t) = \{G, H\}.\]
+En particular, $G$ es una cantidad conservada sii $\{G,H\}=0$.
+\end{prop}
+
+Pasamos ahora a estudiar el formalismo lagrangiano. Para eso, empezamos describiendo la evolución de una partícula en $\RR^3$ dada en coordenadas $q=(q^1,q^2,q^3)$ y sujeta a un campo de fuerzas dado por un potencial $V:\RR^3\to \RR$. Definimos el \emph{Lagrangiano}
+\[L(q^i,\dot{q}^i) = \frac{m}{2}\Vert \dot{q}\Vert^2 -V(q),\]
+donde $\dot{q}$ denota a la derivada temporal de $q$, es decir, a la velocidad de la partícula. El movimiento está determinado por el principio de mínima acción; más precisamente, si la partícula se encuentra primero en una posición $a$ y luego en una posición $b$, el camino que toma es el que minimiza el funcional \[\int_a^b L(q^i,\dot{q}^i)\,\dd t.\]
+Por lo tanto emplearemos técnicas variacionales para describir el movimiento de la partícula. Si $v_0=(q_0^i,\dot{q}_0^i)$ y $v_1=(q_1^i, \dot{q}_1^i)$ describen a la posición y velocidad inicial y final de la partícula respectivamente, buscamos minimizar el funcional dado en el espacio $P=\{\sigma=(q,\dot{q})$ donde $q:[a,b]\to \RR^3 \text{ es tal que }\sigma(a)=v_0$ y $\sigma(b)=v_1\}$. Consideremos entonces el funcional $S:P\to \RR$ dado por
+\[(\sigma, \sigma')\mapsto \int_a^b L(\sigma, \sigma')\,\dd t.\]
+Si $\sigma_s$ es una curva en $P$ definida en $(-\varepsilon,\varepsilon)$, entonces $\sigma_0$ es un punto crítico para $S$ si
+\[\dds\, S(\sigma_s)\bigg{|}_{s=0}=0.\]
+Si escribimos $\sigma_s(t)=(q^i_s(t),\dot{q}^i_s(t))$ y asumimos que $L$ es lo suficientemente regular, tenemos que
+\begin{align*}
+\dds\,S(\sigma_s)&=\dds\int_a^b L(q^i_s,\dot{q}^i_s)\dd t\\
+&= \int_a^b \dds \, L(q^i_s,\dot{q}^i_s)\dd t\\
+&= \sum_{i=1}^n \int_a^b \left( \pardev{L}{q^i} \,\pardev{q^i}{s} + \pardev{L}{\dot{q}^i}\,\pardev{\dot{q}^i}{s} \right)\dd t\\
+&= \sum_{i=1}^n \left( \int_a^b  \pardev{L}{q^i} \,\pardev{q^i}{s} \dd t\right)+ \left(\int_a^b \pardev{L}{\dot{q}^i}\,\frac{\partial^2 q^i}{\partial t\partial s}\dd t \right)
+\end{align*}
+
+Aplicando partes sobre el segundo sumando, obtenemos:
+\begin{align*}
+\int_a^b \pardev{L}{\dot{q}^i}\,\frac{\partial^2 q^i}{\partial t\partial s}\dd t &= \left(\pardev{L}{\dot{q}^i}\,\pardev{q^i}{s}\right)\bigg|_a^b - \int_a^b \left(\ddt\!\left(\pardev{L}{\dot{q}^i}\right)\pardev{q^i}{s}\right)\,\dd t\\
+&=- \int_a^b \left(\ddt\!\left(\pardev{L}{\dot{q}^i}\right)\pardev{q^i}{s}\right)\,\dd t
+\end{align*}
+pues $q^i$ es constante respecto a $s$ en los extremos $a$ y $b$. Aplicando esto en nuestra igualdad original, concluimos que si $\sigma_0$ es punto crítico, se tiene
+\[0=\dds\,S(\sigma_s) = \sum_{i=1}^n \int_a^b  \left(\pardev{L}{q^i} - \ddt\!\left(\pardev{L}{\dot{q}^i} \right) \right)\pardev{q^i}{s}\, \dd t,\]
+y como esto debe valer para cualquier elección de camino $q_s^i$, obtenemos por el lema fundamental del cálculo de variaciones las \emph{ecuaciones de Euler-Lagrange}:
+\[\pardev{L}{q^i} = \ddt\!\left(\pardev{L}{\dot{q}^i}\right).\]
+Observemos que para la elección de Lagrangiano que dimos, estas ecuaciones recuperan la segunda ley de Newton, pues queda:
+\[-\pardev{V}{q^i} = m\ddot{q}^i.\]
+
+Tratemos de deducir las ecuaciones de Hamilton a partir del formalismo lagrangiano. Llamemos $p_i=\pardev{L}{\dot{q}^i}$ y asumamos que el cambio de coordenadas $p_i\mapsto \dot{q}^i$ es no degenerado. De esta manera, definimos el Hamiltoniano $H(q^i,p_i) = \sum_{i=1}^n p_i\dot{q}^i - L(q^i,\dot{q}^i)$. Esta definición tiene sentido pues podemos obtener $\dot{q}^i$ a partir de $p_i$. Si derivamos $H$, obtenemos
+\[\pardev{H}{p_k} = \dot{q}^k + \sum_{i=1}^n \left(p_i\pardev{\dot{q}^i}{p_k} -\pardev{L}{\dot{q}^i}\,\pardev{\dot{q}^i}{p_k}\right)=\dot{q}^k\]
+y
+\[\pardev{H}{q^k} =  -\pardev{L}{q^k}+\sum_{i=1}^n \left(p_i\pardev{\dot{q}^i}{q^k}-\pardev{L}{\dot{q}^i}\,\pardev{\dot{q}^i}{q^k}\right)=-\pardev{L}{q^k}.\]
+Ahora bien, las ecuaciones de Euler-Lagrange implican
+\[\pardev{H}{q^k}=-\pardev{L}{q^k}=-\ddt\!\left(\pardev{L}{\dot{q}^k}\right) = -\ddt p_k\]
+o en otras palabras
+\[-\pardev{H}{q^k}=\dot{p}_k\]
+y así recuperamos las ecuaciones de Hamilton.
+
+Tratemos de generalizar lo que hicimos a una variedad arbitraria $Q$ de dimensión $n$ con un operador Lagrangiano $L:TQ\to \RR$. Buscamos construir operadores $E$ y $FL$ de modo que este diagrama conmute:
+
+\textcolor{red}{diagrama}
+
+Para las cuentas que siguen, elegimos un abierto $U\subseteq Q$ que trivialice tanto al fibrado tangente como al cotangente. Empecemos definiendo $FL:TQ\to T^*Q$. Si $v\in T_uQ$, entonces definimos $FL(v):T_uQ\to\RR$ como la aplicación
+\[w\mapsto \dds L(v+sw)\bigg|_{s=0.}\]
+Notemos que el dominio de $FL(v)$ es necesariamente $T_uQ$ por la conmutatividad del triángulo inferior del diagrama. Esencialmente, el mapa $FL$ es el análogo al cambio de coordenadas $(q^i,\dot{q}^i)\mapsto (q^i,p_i)$ del ejemplo anterior.
+
+Escribamos a $FL$ en coordenadas locales. Si $v=(u,e)$ y $w=(u,e')$ son elementos de $T_uQ$, entonces
+\[\left(FL(u,e)\right)(u,e') = \dds\left(L(u,e+se')\right)\bigg|_{s=0}=(D_2L(u,e))(u,e'),\]
+donde $D_2$ denota a la derivada respecto a la segunda variable. De esta manera, si tenemos coordenadas $(q^i,\dot{q}^i)$, es $FL(q^i, \dot{q}^i)=(q^i,\pardev{L}{\dot{q}^i})$, coincidiendo con el caso anterior. El morfismo $E:TQ\to \RR$ se define entonces como
+\[E(v)=FL(v)(v)-L(v).\]
+
+Finalmente, daremos una $2$-forma distinguida sobre $TQ$, a la que llamamos \emph{2-forma de Lagrange}. Recordemos que en $T^*Q$ tenemos la forma simpléctica canónica $w$. La 2-forma de Lagrange se define como
+\[w_L = (FL)^*w.\]
+Busquemos una expresión local para $w_L$. Supongamos que $U$ trivializa el fibrado tangente, de modo que $TQ|_u=U\times E$. Luego, podemos identificar $T(TQ|_U)$ con $TU\times TE$ y a la vez con $(U\times E)\times(E\times E)$. De esta forma:
+\begin{align*}
+w_L(u,e)((e_1,e_2),(e_3,e_4))= &D_1D_2L(u,e)(e_3)(e_1)\\
+-&D_1D_2L(u,e)(e_1)(e_3)\\
++&D_2D_2L(u,e)(e_4)(e_1)\\
+-&D_2D_2L(u,e)(e_2)(e_3).
+\end{align*}
+Estamos haciendo un pequeño abuso de notación, pues los elementos $(e_1,e_2)$ son en realidad pares $((u,e),(e_1,e_2))$. De esta manera, si tenemos coordenadas $(q^i,\dot{q}^i)$, la expresión local es:
+\[w_L(q^i,\dot{q}^i)=\sum_{i,j} \left(\frac{\partial^2 L}{\partial\dot{q}^i\partial q^j}\,\dd q^i\wedge \dd q^j + \frac{\partial^2 L}{\partial\dot{q}^i\partial\dot{q}^j}\,\dd q^i\wedge \dd \dot{q}^j \right).\]
+
+\begin{defn} El operador $L$ se dice \emph{regular} si $D_2D_2 L$ es no degenerada. Si tenemos coordenadas $(q^i,\dot{q}^i)$, esto es que la matriz
+\[\left( \frac{\partial^2 L}{\partial\dot{q}^i\partial\dot{q}^j} \right)_{i,j} \]
+sea no degenerada.
+\end{defn}
 \end{document}
