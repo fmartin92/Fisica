@@ -68,6 +68,7 @@ stringstyle=\color{orange}}
 \newcommand{\cotg}{T^*M}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\XX}{\mathfrak{X}}
+\newcommand{\fkg}{\mathfrak{g}}
 \newcommand{\LL}{\mathcal{L}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddt}{\frac{\dd}{\dd t}}
@@ -399,11 +400,26 @@ y así recuperamos las ecuaciones de Hamilton.
 
 Tratemos de generalizar lo que hicimos a una variedad arbitraria $Q$ de dimensión $n$ con un operador Lagrangiano $L:TQ\to \RR$. Buscamos construir operadores $E$ y $FL$ de modo que este diagrama conmute:
 
-\textcolor{red}{diagrama}
+\[
+\begin{tikzpicture}
+\node (R1) at (0,0) {$\RR$};
+\node (cotg) at (-2,-2) {$T^*Q$};
+\node (tg) at (2,-2) {$TQ$};
+\node (Q) at (0,-4) {$Q$};
+\node (R2) at (5,-2) {$\RR$};
+
+\draw[->] (tg) to node[above, font=\footnotesize]{$L$} (R2);
+\draw[->] (tg) to node[right, font=\footnotesize]{$\pi_{TQ}$} (Q);
+\draw[->] (tg) to node[above, font=\footnotesize]{$FL$} (cotg);
+\draw[->] (cotg) to node[left, font=\footnotesize]{$\pi_{T^*Q}$} (Q);
+\draw[->] (cotg) to node[left, font=\footnotesize]{$H$} (R1);
+\draw[->] (tg) to node[right, font=\footnotesize]{$E$} (R1);
+\end{tikzpicture}
+\]
 
 Para las cuentas que siguen, elegimos un abierto $U\subseteq Q$ que trivialice tanto al fibrado tangente como al cotangente. Empecemos definiendo $FL:TQ\to T^*Q$. Si $v\in T_uQ$, entonces definimos $FL(v):T_uQ\to\RR$ como la aplicación
 \[w\mapsto \dds L(v+sw)\bigg|_{s=0.}\]
-Notemos que el dominio de $FL(v)$ es necesariamente $T_uQ$ por la conmutatividad del triángulo inferior del diagrama. Esencialmente, el mapa $FL$ es el análogo al cambio de coordenadas $(q^i,\dot{q}^i)\mapsto (q^i,p_i)$ del ejemplo anterior.
+Esencialmente, el mapa $FL$ (al cual llamamos \emph{transformada de Legendre}) es el análogo al cambio de coordenadas $(q^i,\dot{q}^i)\mapsto (q^i,p_i)$ del ejemplo anterior. Notemos que el dominio de $FL(v)$ es necesariamente $T_uQ$ por la conmutatividad del triángulo inferior del diagrama; esto es, en otras palabras, que $FL$ es un morfismo de fibrados.
 
 Escribamos a $FL$ en coordenadas locales. Si $v=(u,e)$ y $w=(u,e')$ son elementos de $T_uQ$, entonces
 \[\left(FL(u,e)\right)(u,e') = \dds\left(L(u,e+se')\right)\bigg|_{s=0}=(D_2L(u,e))(u,e'),\]
@@ -413,17 +429,126 @@ donde $D_2$ denota a la derivada respecto a la segunda variable. De esta manera,
 Finalmente, daremos una $2$-forma distinguida sobre $TQ$, a la que llamamos \emph{2-forma de Lagrange}. Recordemos que en $T^*Q$ tenemos la forma simpléctica canónica $w$. La 2-forma de Lagrange se define como
 \[w_L = (FL)^*w.\]
 Busquemos una expresión local para $w_L$. Supongamos que $U$ trivializa el fibrado tangente, de modo que $TQ|_u=U\times E$. Luego, podemos identificar $T(TQ|_U)$ con $TU\times TE$ y a la vez con $(U\times E)\times(E\times E)$. De esta forma:
-\begin{align*}
-w_L(u,e)((e_1,e_2),(e_3,e_4))= &D_1D_2L(u,e)(e_3)(e_1)\\
--&D_1D_2L(u,e)(e_1)(e_3)\\
-+&D_2D_2L(u,e)(e_4)(e_1)\\
--&D_2D_2L(u,e)(e_2)(e_3).
+\begin{align*} 
+w_L(u,e)((e_1,e_2),(e_3,e_4))= &D_1D_2L(u,e)(e_1)(e_3)\\
+-&D_1D_2L(u,e)(e_3)(e_1)\\
++&D_2D_2L(u,e)(e_1)(e_4)\\
+-&D_2D_2L(u,e)(e_3)(e_2). \label{wL-local}
 \end{align*}
 Estamos haciendo un pequeño abuso de notación, pues los elementos $(e_1,e_2)$ son en realidad pares $((u,e),(e_1,e_2))$. De esta manera, si tenemos coordenadas $(q^i,\dot{q}^i)$, la expresión local es:
 \[w_L(q^i,\dot{q}^i)=\sum_{i,j} \left(\frac{\partial^2 L}{\partial\dot{q}^i\partial q^j}\,\dd q^i\wedge \dd q^j + \frac{\partial^2 L}{\partial\dot{q}^i\partial\dot{q}^j}\,\dd q^i\wedge \dd \dot{q}^j \right).\]
 
-\begin{defn} El operador $L$ se dice \emph{regular} si $D_2D_2 L$ es no degenerada. Si tenemos coordenadas $(q^i,\dot{q}^i)$, esto es que la matriz
+\begin{defn} El operador $L$ se dice \emph{regular} si $D_2D_2 L$ es no degenerada. Esto es equivalente a que la forma de Lagrange $w_L$ sea simpléctica, que $L$ sea difeomorfismo local o que, si dadas coordenadas $(q^i,\dot{q}^i)$, la matriz
 \[\left( \frac{\partial^2 L}{\partial\dot{q}^i\partial\dot{q}^j} \right)_{i,j} \]
 sea no degenerada.
+\end{defn}
+
+\section{11/04 -- Más formalismo Lagrangiano}
+
+\begin{defn} Dada una variedad $Q$, una \emph{ecuación de segundo orden} en $Q$ es un campo vectorial $X:TQ\to T(TQ)$ de modo que si $\pi:TQ\to Q$ denota a la proyección canónica, entonces $T\pi\circ X = \id_{TQ}$.
+\end{defn}
+
+Tratemos de motivar esta definición. Elijamos un abierto $U\in Q$ que trivialice $TQ$, de modo que $TQ|_U \simeq U\times E$ y así $T(TQ)|_{\pi^{-1}(U)} \simeq (U\times E)\times (E\times E)$. Si escribimos a $X$ en coordenadas locales, tenemos que
+\[X(u,e) = ((u,e), Y(u,e), Z(u,e)),\]
+donde $Y,Z:U\times E\to E$ son funciones suaves. Veamos qué dice la condición $T\pi\circ X = \id_{TQ}$ acerca de $Y$ y $Z$. En primer lugar, en coordenadas locales, la aplicación $T\pi$ es
+\[T\pi((u,e),(e_1,e_2)) = (u,e_1).\]
+De este modo, nuestra condición $T\pi\circ X = \id_{TQ}$ se traduce a que $(u,Y(u,e))=(u,e)$, por lo que $Y$ debe ser la proyección en la segunda coordenada. Esto nos dice que si $(u(t), e(t))$ es una curva integral de $X$ dada en coordenadas locales, entonces
+\begin{align*}
+\dot{u}(t)&=Y(u(t),e(t)) = e(t)\\
+\dot{e}(t)&=Z(u(t), e(t)).
+\end{align*}
+Este sistema es la reducción de orden de la ecuación de segundo orden $\ddot{u} = Z$, lo cual muestra por qué la condición que pedimos en la definición nos permite plantear ecuaciones de segundo orden sobre variedades.
+
+Si $c:(-\varepsilon,\varepsilon)\to TQ$ es una curva integral de $X$, llamamos \emph{curva base} a $\pi\circ c$. En otras palabras, la curva base es la curva de trayectorias (sin guardar información sobre la velocidad) de la partícula que estamos modelando.
+
+\begin{defn} Un campo $X_E$ sobre $TQ$ se dice \emph{Lagrangiano} si se tiene que
+\[\dd E = w_L(X_E,-),\]
+de manera análoga al caso Hamiltoniano. Por ejemplo, si $L$ es regular, la forma $w_L$ es simpléctica y así cualquier $E$ define un campo Lagrangiano asociado.
+\end{defn}
+
+\begin{thm} \textcolor{red}{arreglar: $E$ denota a un abierto trivializante y a una función de energía} Si $X_E$ es una ecuación de segundo orden Lagrangiana entonces, en una trivialización local $TQ|_U \simeq U\times E$ con coordenadas $(u,e)$, las curvas integrales $(u(t),e(t))$ del campo $X_E$ satisfacen las ecuaciones de Euler-Lagrange
+\begin{align*}
+\dot{u}(t)&=e(t)\\
+\ddt D_2 L(u(t),e(t)) v &= D_1L(u(t),e(t))v.
+\end{align*}
+Vale la pena observar que, si tenemos coordenadas $(q^i,\dot{q}^i)$, estas ecuaciones son
+\begin{align*}
+\ddt q^i &=\dot{q}^i\\
+\ddt \left( \pardev{L}{\dot{q}^i}\right)&= \pardev{L}{q^i},
+\end{align*}
+es decir, las ecuaciones de Euler-Lagrange clásicas.
+
+Además, si el operador $L$ es regular, entonces cualquier campo Lagrangiano $X_E$ es automáticamente una ecuación de segundo orden.
+\end{thm}
+\begin{proof} La demostración consiste en simplemente escribir todo en coordenadas locales. Como venimos haciendo, abusando notación escribiremos un elemento de $T(TQ)$ en coordenadas locales como $(u,e,e_3,e_4)$.
+En primer lugar, tenemos que
+\begin{align*}
+\dd E(u,e)(e_3,e_4) =& D_1(D_2L(u,e)e)e_3 + D_2(D_2L(u,e)e)e_4\\
+-&D_1L(u,e)e_3 - D_2 L(u,e)e_4\\
+=&  D_1D_2L(u,e)e\, e_3 + D_2L(u,e)(D_1e)e_3\\
++&  D_2D_2L(u,e)e\,e_4 + D_2L(u,e)(D_2e)e_4\\
+-&D_1L(u,e)e_3 - D_2 L(u,e)e_4,
+\end{align*}
+donde usamos la regla de Leibniz para obtener la última igualdad. Ahora, como $D_1e=0$ y $D_2 e= \id$, la identidad queda
+\[\dd E(u,e)(e_3,e_4) =  D_1D_2L(u,e)e\, e_3 
++  D_2D_2L(u,e)e\,e_4 
+-D_1L(u,e)e_3. \]
+Utilizando las escrituras locales de $w_L$ y $X_E$ vistas previamente obtenemos:
+\begin{align*}
+w_L(u,e)((Y,Z),(e_3,e_4))=& D_1D_2L(u,e)Y\, e_3 - D_1D_2L(u,e)e_3\,Y\\
++& D_2D_2L(u,e)Y\, e_4 - D_2D_2L(u,e)e_3\,Z
+\end{align*}
+Finalmente, como $X_E$ es una ecuación de segundo orden tenemos que $Y=e$, y de la identidad $\dd E = w_L(X_E ,-)$ obtenemos
+\[D_1L(u,e)e_3 = D_1 D_2L(u,e)e_3\,e + D_2D_2L(u,e)e_3\, Z.\]
+De esta forma, si $(u(t), e(t))$ es una curva integral del campo, es decir, $\dot{u}=e$ y $\dot{e}=Z$, entonces
+\[D_1L(u,\dot{u})e_3 = D_1D_2L(u,\dot{u})e_3\, \dot{u}+D_2D_2L(u,\dot{u})e_3\, \dot{e} = \ddt \left( D_2L(u,\dot{u})e_3\right)\]
+como queríamos ver.
+
+Probemos ahora la segunda afirmación del enunciado. Supongamos que $L$ es regular; como $\dd E = w_L(X_E,-)$, la expresión local nos dice
+\begin{align*}
+& D_1D_2L(u,e)e\, e_3  +  D_2D_2L(u,e)e\,e_4  -D_1L(u,e)e_3\\
+=& D_1D_2L(u,e)Y\, e_3 - D_1D_2L(u,e)e_3\,Y
++ D_2D_2L(u,e)Y\, e_4 - D_2D_2L(u,e)e_3\,Z.
+\end{align*}
+Evaluando en $e_3=0$, esto es
+\[D_2D_2 L(u,e)e\, e_4=D_2D_2L(u,e)Y\, e_4.\]
+Como esta identidad vale para cualquier elección de $e_4$ y $D_2D_2 L$ es no singular, concluimos que $Y=e$ y por lo tanto el campo define una ecuación de segundo orden, como queríamos.
+\end{proof}
+
+\begin{defn} El Lagrangiano $L$ se dice \emph{hiperregular} si $FL$ es un difeomorfismo. En coordenadas $(q^i,\dot{q}^i)$ esto se traduce a que el cambio de coordenadas $(q^i,\dot{q}^i)\mapsto (q^i,p_i)$ esté bien definido globalmente. En este caso, el operador $H$ del diagrama que escribimos previamente es $H=E\circ FL^{-1}$.
+\end{defn}
+
+\begin{thm} Si $L$ es hiperregular, entonces $X_H = FL_*(X_E)$. Por esta asignación, las curvas integrales de $X_E$ se mapean a curvas integrales de $X_H$ y sus curvas base coinciden. Por lo tanto, la formulación Hamiltoniana y la Lagrangiana coinciden.
+\end{thm}
+\begin{proof} Sean $x_1\in T_v(TQ)$, $x_2 = T_vFL(x_1)$. Luego,
+\begin{align*}
+w(T_vFL(X_E), x_2) &= w_L(X_E(v), x_1)\\
+&= \dd E(v)(x_1)\\
+&= \dd (H\circ FL)(v)(x_1)\\
+&=\dd H(FL(v))(x_2)\\
+&=w(X_H(v), x_2).
+\end{align*}
+Como esto vale para todo $x_2$, entonces $TFL(X_E)=X_H$ pues la forma $w$ es no degenerada.
+\end{proof}
+
+\begin{defn} Dada una variedad $M$, una \emph{acción} de un grupo de Lie $G$ sobre la variedad es un morfismo suave $G\to \mathrm{Diff}(M)$. Pediremos que la acción respete estructura adicional que tenga la variedad: si es simpléctica, que el pullback de la forma simpléctica sea la misma forma; si es riemanniana, que actúe por isometrías.
+\end{defn}
+Dado un grupo de Lie $G$, notamos por $\fkg$ a su álgebra de Lie asociada. Si $\eta\in\fkg$, podemos definir una curva $g_t = \exp(t\eta)$ en $G$ (que es de hecho un grupo uniparamétrico). Ahora, dado $m\in M$ defino $X_\eta(m)\in T_m M$ como
+\[X_\eta(m) = \ddt (g_t \cdot m) \bigg|_{t=0.}\]
+Notemos que el lado derecho depende de $\eta$, pues $g_t$ se construye a partir de $\eta$. De esta manera tenemos una aplicación $i:\fkg\to \XX(M)$ dada por $\eta\mapsto X_{\eta}$, que resulta ser un morfismo de álgebras de Lie (aunque no lo vamos a demostrar).
+
+Si $(M,\langle,\rangle)$ es una variedad riemanniana, podemos definir un operador $K:TM\to \RR$, al que llamaremos \emph{energía cinética}, dado por $v\mapsto \langle v,v\rangle /2$. Si se toma a $K$ como Lagrangiano, las ecuaciones de Euler-Lagrange definen exactamente las geodésicas de la variedad. Como $M$ es riemanniana, tenemos un isomorfismo canónico $\varphi:TM\to T^*M$ dado por $v\mapsto \langle v,-\rangle$. De esta manera, a veces pensaremos a la aplicación de energía cinética como $K:T^*M\to \RR$ dada simplemente por $\alpha \mapsto \langle \varphi^{-1}(\alpha), \varphi^{-1}(\alpha)\rangle/2$.
+
+\begin{defn} Un \emph{sistema mecánico simple con simetrías} consiste de:
+\begin{enumerate}
+\item Una variedad riemanniana $(M,\langle, \rangle)$.
+\item Su fibrado cotangente $Q=T^*M$ equipado con la forma simpléctica canónica.
+\item El operador de energía cinética $K:Q\to \RR$.
+\item Una función $V:M\to \RR$ a la que llamaremos \emph{potencial}.
+\item Una acción por isometrías de un grupo de Lie $G$ en $M$ que respete el potencial; es decir $V(gm)=V(m)$ para todo $m\in M$ y $g\in G$. 
+\end{enumerate}
+Además, la acción de $G$ en $M$ induce una acción de $G$ en $Q$. Específicamente, si $L_g$ denota el difeomorfismo de $M$ dado por multiplicar por $g$, entonces la acción en $Q$ está dada por
+\[g\cdot \alpha = L_{g^{-1}}^*(\alpha).\]
+Pediremos además que esta acción sea compatible con la forma simpléctica en el cotangente. \textcolor{red}{(esto quizás se deduce de las otras compatibilidades)}
 \end{defn}
 \end{document}
